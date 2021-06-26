@@ -11,3 +11,20 @@
     float: right;
     font-size: 20px;
 }
+
+/* Styling for the start div */
+#start {
+    /* Center the elements */
+    text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+/* Make the start button have a purple background color and white text */
+#start-quiz {
+    background: purple;
+    color: white;
+    font-size: 20px;
+    /* round the button corners */
+    border-radius: 10px;
+}
