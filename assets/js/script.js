@@ -9,11 +9,15 @@ var answerFeedbackTextEl = document.getElementById("answer-feedback-text");
 var enterInitialsEl = document.getElementById("enter-initials");
 var questionEl = document.getElementById("question");
 var finalScoreMessageEl = document.getElementById("final-score-message");
+var userInitialsEl = document.getElementById("user-initials");
+var submitEl = document.getElementById("submit");
 
 var secondsLeft = 60;
 var questionIndex = 0;
 // the user's score
 var score = 0;
+// Array to hold the high scores
+var highScores = [];
 
 // Array containing questions for the quiz
 var questions = [
@@ -121,7 +125,6 @@ startButtonEl.addEventListener("click", function(event) {
 /* Add a listener for when a choice is clicked */
 answerChoicesEl.addEventListener("click", function(event) {
     var element = event.target;
-    console.log(element);
 
     // Check if it is an answer choice
     if (element.getAttribute("data-is-correct-answer")) {
@@ -148,3 +151,23 @@ answerChoicesEl.addEventListener("click", function(event) {
         }
     }
 });
+
+// Handle the user initials form submission
+function submitForm(event) {
+    // Prevent default action
+    event.preventDefault();
+    
+    // Get the user initials and trim any white spaces
+    var userInitials = userInitialsEl.value.trim();
+    
+    if(userInitials){
+        // Store the score and initials in local storage
+        highScores.push({"initials": userInitials, "score": score});
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+    } else {
+        alert("Please enter initials");
+    }
+  }
+  
+  // Add listener to submit element
+  submitEl.addEventListener("click", submitForm);
