@@ -1,0 +1,13 @@
+/* Remove the broder and background for the high scores button and make the text color purple */
+#view-highscores {
+    border: none;
+    background: none;
+    color: purple;
+    font-size: 20px;
+}
+
+/* Put the timer on the right on the same line as the view highscores button */
+#time-left {
+    float: right;
+    font-size: 20px;
+}
