@@ -5,9 +5,12 @@ var timeLeftEl = document.getElementById("time-left");
 var quizQuestionEl = document.getElementById("quiz-question");
 var answerChoicesEl = document.getElementById("answer-choices");
 var answerFeedbackEl = document.getElementById("answer-feedback");
+var answerFeedbackTextEl = document.getElementById("answer-feedback-text");
 
 var secondsLeft = 60;
 var questionIndex = 0;
+// the user's score
+var score = 0;
 
 // Array containing questions for the quiz
 var questions = [
@@ -40,6 +43,14 @@ var questions = [
 
 // Display a quiz question to the user
 function displayNextQuestion() {
+    // Hide the answer feedback
+    answerFeedbackEl.style.display = "none";
+
+    // Remove any answers for the previous question
+    while (answerChoicesEl.firstChild) {
+        answerChoicesEl.removeChild(answerChoicesEl.firstChild);
+    }
+
     question = questions[questionIndex];
     // Display the question
     quizQuestionEl.textContent = question.question;
@@ -65,6 +76,9 @@ startButtonEl.addEventListener("click", function(event) {
     startEl.style.display = "none";
     question.style.display = "block";
 
+    // reset the score
+    score = 0;
+
     // Set the question index
     questionIndex = 0;
     // Show the question
@@ -78,9 +92,40 @@ startButtonEl.addEventListener("click", function(event) {
         // Update the time
         timeLeftEl.textContent = "Time: " + secondsLeft;
     
-        if(secondsLeft === 0) {
+        if(secondsLeft <= 0) {
             // Clear the timer since time has run out
             clearInterval(timerInterval);
         }
       }, 1000);
+});
+
+/* Add a listener for when a choice is clicked */
+answerChoicesEl.addEventListener("click", function(event) {
+    var element = event.target;
+    console.log(element);
+
+    // Check if it is an answer choice
+    if (element.getAttribute("data-is-correct-answer")) {
+        if (element.getAttribute("data-is-correct-answer") === "true") {
+            // The user got the question correct. Increase the score
+            score += 10;
+        } else {
+            // The user got the question wrong so deduct a time penalty
+            secondsLeft -= 10;
+        }
+
+        // Display whether the answer was correct or not
+        var textToDisplay = element.getAttribute("data-is-correct-answer") === "true" ? "Correct!" : "Wrong!";
+        answerFeedbackTextEl.textContent = textToDisplay;
+        // Show the feedback
+        answerFeedbackEl.style.display = "block";
+
+        questionIndex++;
+
+        if (questionIndex < questions.length && secondsLeft > 0) {
+            // There are more questions and there is still time left
+            // Display the next question after 250ms so the user can see the feedback 
+            setTimeout(displayNextQuestion, 250);
+        }
+    }
 });

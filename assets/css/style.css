@@ -52,3 +52,21 @@
     /* Make the div no larger than its contents */
     width: fit-content;
 }
+
+/* Change the opacity and cursor when hovering over a choice */
+.answer-choice:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+/* Styling for the answer feedback text */
+#answer-feedback-text {
+    color: gray;
+    text-align: left;
+    font-style: italic;
+}
+
+/* Styling for the line separating the answer choice and the feedback */
+hr {
+    color: gray;
+}
