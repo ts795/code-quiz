@@ -2,7 +2,7 @@
 #view-highscores {
     border: none;
     background: none;
-    color: purple;
+    color: rebeccapurple;
     font-size: 20px;
 }
 
@@ -12,8 +12,8 @@
     font-size: 20px;
 }
 
-/* Styling for the start div */
-#start {
+/* Styling for divs that are displayed in main */
+.displayed-section {
     /* Center the elements */
     text-align: center;
     margin-left: 25%;
@@ -22,9 +22,33 @@
 
 /* Make the start button have a purple background color and white text */
 #start-quiz {
-    background: purple;
+    background: rebeccapurple;
     color: white;
     font-size: 20px;
     /* round the button corners */
     border-radius: 10px;
+}
+
+/* Initially hide all divs that aren't the first section */
+.subsequent-sections {
+    display: none;
+}
+
+/* Set the styling for the quiz question */
+#quiz-question {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Styling for the displayed answer choices */
+.answer-choice {
+    text-align: left;
+    background-color: rebeccapurple;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding: 2px;
+    color: white;
+    border-radius: 5px;
+    /* Make the div no larger than its contents */
+    width: fit-content;
 }
