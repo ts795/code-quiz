@@ -70,3 +70,23 @@
 hr {
     color: gray;
 }
+
+/* Styling for the final score message */
+#final-score-message {
+    text-align: left;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/* Styling for the submit button for submitting the user's initials */
+#submit {
+    background: rebeccapurple;
+    color: white;
+    /* round the button corners */
+    border-radius: 2px;
+}
+
+/* Put the form on the left hand side of the enclosing div */
+form {
+    float: left;
+}

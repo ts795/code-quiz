@@ -6,6 +6,9 @@ var quizQuestionEl = document.getElementById("quiz-question");
 var answerChoicesEl = document.getElementById("answer-choices");
 var answerFeedbackEl = document.getElementById("answer-feedback");
 var answerFeedbackTextEl = document.getElementById("answer-feedback-text");
+var enterInitialsEl = document.getElementById("enter-initials");
+var questionEl = document.getElementById("question");
+var finalScoreMessageEl = document.getElementById("final-score-message");
 
 var secondsLeft = 60;
 var questionIndex = 0;
@@ -69,6 +72,20 @@ function displayNextQuestion() {
     }
 }
 
+// Display the final score to the user
+function displayFinalScore() {
+    // Hide the answer feedback
+    answerFeedbackEl.style.display = "none";
+    // Hide the question
+    questionEl.style.display = "none";
+
+    // Show the final score
+    finalScoreMessageEl.textContent = "Your final score is " + score
+
+    // Display the final score
+    enterInitialsEl.style.display = "block";
+
+}
 
 // Click event handler for the start button
 startButtonEl.addEventListener("click", function(event) {
@@ -92,9 +109,11 @@ startButtonEl.addEventListener("click", function(event) {
         // Update the time
         timeLeftEl.textContent = "Time: " + secondsLeft;
     
-        if(secondsLeft <= 0) {
-            // Clear the timer since time has run out
+        if(secondsLeft <= 0 || questionIndex >= questions.length) {
+            // Clear the timer since time has run out or there are no more questions
             clearInterval(timerInterval);
+            // Show the final score
+            displayFinalScore();
         }
       }, 1000);
 });
