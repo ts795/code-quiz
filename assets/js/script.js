@@ -150,6 +150,8 @@ startButtonEl.addEventListener("click", function(event) {
     // Hide the start div and show the question div
     startEl.style.display = "none";
     questionEl.style.display = "block";
+    // Hide the high scores button when the quiz is in progress
+    viewHighScoresEl.style.visibility = "hidden";
 
     // reset the score
     score = 0;
@@ -244,6 +246,8 @@ goBackButtonEl.addEventListener("click", function() {
     // Stop showing the high scores screen
     viewScoresEl.style.display = "none";
     startEl.style.display = "block";
+    // Show the high scores button
+    viewHighScoresEl.style.visibility = "visible";
 });
 
   // Get the values from local storage
