@@ -236,5 +236,12 @@ function submitForm(event) {
       displayHighScores();
   });
 
+  // Add a click listener for the go back button
+goBackButtonEl.addEventListener("click", function() {
+    // Stop showing the high scores screen
+    viewScoresEl.style.display = "none";
+    startEl.style.display = "block";
+});
+
   // Get the values from local storage
   init();
