@@ -104,6 +104,9 @@ function displayFinalScore() {
     // Hide the question
     questionEl.style.display = "none";
 
+    // Clear any previously entered initials
+    userInitialsEl.value = "";
+
     // Show the final score
     finalScoreMessageEl.textContent = "Your final score is " + score
 
