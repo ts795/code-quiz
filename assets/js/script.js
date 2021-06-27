@@ -146,7 +146,7 @@ function displayHighScores() {
 startButtonEl.addEventListener("click", function(event) {
     // Hide the start div and show the question div
     startEl.style.display = "none";
-    question.style.display = "block";
+    questionEl.style.display = "block";
 
     // reset the score
     score = 0;
