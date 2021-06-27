@@ -14,6 +14,8 @@ var submitEl = document.getElementById("submit");
 var viewScoresEl = document.getElementById("view-scores");
 var highScoresEl = document.getElementById("high-scores");
 var viewHighScoresEl = document.getElementById("view-highscores");
+var goBackButtonEl = document.getElementById("go-back");
+var clearHighScoresButtonEl = document.getElementById("clear-high-scores");
 
 var secondsLeft = 60;
 var questionIndex = 0;
@@ -224,6 +226,15 @@ function submitForm(event) {
 
   // Add a click listener for the view high scores button
   viewHighScoresEl.addEventListener("click", displayHighScores);
+
+  // Add a click listener for the clear high scores button
+  clearHighScoresButtonEl.addEventListener("click", function() {
+      highScores = [];
+      // Clear the high scores from persistent storage
+      localStorage.removeItem('highScores');
+      // Update the high scores
+      displayHighScores();
+  });
 
   // Get the values from local storage
   init();
