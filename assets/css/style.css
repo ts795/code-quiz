@@ -78,8 +78,8 @@ hr {
     margin-top: 10px;
 }
 
-/* Styling for the submit button for submitting the user's initials */
-#submit {
+/* Styling for the buttons in the main element */
+.main-button {
     background: rebeccapurple;
     color: white;
     /* round the button corners */
@@ -89,4 +89,14 @@ hr {
 /* Put the form on the left hand side of the enclosing div */
 form {
     float: left;
+}
+
+/* Styling for the high score entries */
+.high-score-entry {
+    text-align: left;
+}
+
+/* Add some space between the high scores and buttons below them */
+#high-scores {
+    margin-bottom: 5px;
 }

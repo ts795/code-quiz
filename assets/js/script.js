@@ -11,6 +11,9 @@ var questionEl = document.getElementById("question");
 var finalScoreMessageEl = document.getElementById("final-score-message");
 var userInitialsEl = document.getElementById("user-initials");
 var submitEl = document.getElementById("submit");
+var viewScoresEl = document.getElementById("view-scores");
+var highScoresEl = document.getElementById("high-scores");
+var viewHighScoresEl = document.getElementById("view-highscores");
 
 var secondsLeft = 60;
 var questionIndex = 0;
@@ -47,6 +50,22 @@ var questions = [
         correctAnswerIndex: 3
     }
 ];
+
+// Sort the high scores so the larger scores are at lower indexes
+function sortHighScores() {
+    // Return number greater than 0 if the second element is larger than the first element so it is before it in the array
+    highScores.sort((firstEl, secondEl) => { return secondEl.score - firstEl.score} );
+}
+
+// Get the high scores from local storage
+function init() {
+    var localStorageValues = localStorage.getItem("highScores");
+    if (localStorageValues) {
+        highScores = JSON.parse(localStorageValues);
+    } else {
+        highScores = [];
+    }
+}
 
 // Display a quiz question to the user
 function displayNextQuestion() {
@@ -89,6 +108,36 @@ function displayFinalScore() {
     // Display the final score
     enterInitialsEl.style.display = "block";
 
+}
+
+// Display the high scores
+function displayHighScores() {
+    // Hide the enter initials and start divs
+    enterInitialsEl.style.display = "none";
+    startEl.style.display = "none";
+    // Sort the high scores from highest to lowest
+    sortHighScores();
+
+    // Remove any previously displayed high scores
+    while (highScoresEl.firstChild) {
+        highScoresEl.removeChild(highScoresEl.firstChild);
+    }
+
+    for (var idx = 0; idx < highScores.length; idx++) {
+        var highScoreEntry = document.createElement("div");
+        highScoreEntry.textContent = (idx + 1) + ". " +  highScores[idx].initials + " - " + highScores[idx].score;
+        // Set the class for the entries
+        highScoreEntry.setAttribute("class", "high-score-entry");
+        // Alternate the row colors        
+        if (idx % 2 === 0) {
+            highScoreEntry.style.backgroundColor = "mediumPurple";
+        } else {
+            highScoreEntry.style.backgroundColor = "plum";
+        }
+        highScoresEl.appendChild(highScoreEntry);
+    }
+
+    viewScoresEl.style.display = "block";
 }
 
 // Click event handler for the start button
@@ -164,6 +213,7 @@ function submitForm(event) {
         // Store the score and initials in local storage
         highScores.push({"initials": userInitials, "score": score});
         localStorage.setItem("highScores", JSON.stringify(highScores));
+        displayHighScores();
     } else {
         alert("Please enter initials");
     }
@@ -171,3 +221,9 @@ function submitForm(event) {
   
   // Add listener to submit element
   submitEl.addEventListener("click", submitForm);
+
+  // Add a click listener for the view high scores button
+  viewHighScoresEl.addEventListener("click", displayHighScores);
+
+  // Get the values from local storage
+  init();
